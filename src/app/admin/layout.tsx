@@ -31,6 +31,7 @@ const sidebarLinks = [
     { href: '/admin/speakers', label: 'Speakers', icon: Users },
     { href: '/admin/checkouts', label: 'Checkouts', icon: CreditCard },
     { href: '/admin/registrations', label: 'Registros', icon: Calendar },
+    { href: '/admin/claims', label: 'Reclamos', icon: FileText },
     { href: '/admin/sections', label: 'Secciones', icon: FileText },
     { href: '/admin/media', label: 'Media', icon: ImageIcon },
     { href: '/admin/analytics', label: 'Analytics', icon: BarChart3 },
