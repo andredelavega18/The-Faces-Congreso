@@ -1,0 +1,476 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   CUSTOM FONTS
+   ============================================ */
+
+/* Averox - Display/Titles font */
+@font-face {
+  font-family: 'Averox';
+  src: url('/fonts/Averox/averox.ttf') format('truetype'),
+    url('/fonts/Averox/averox.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Averox';
+  src: url('/fonts/Averox/averox.ttf') format('truetype'),
+    url('/fonts/Averox/averox.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Isidora Sans - Body font */
+@font-face {
+  font-family: 'Isidora Sans';
+  src: url('/fonts/Isidora.Sans/IsidoraSans-Regular.ttf') format('truetype'),
+    url('/fonts/Isidora.Sans/IsidoraSans-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Isidora Sans';
+  src: url('/fonts/Isidora.Sans/IsidoraSans-Medium.ttf') format('truetype'),
+    url('/fonts/Isidora.Sans/IsidoraSans-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Isidora Sans';
+  src: url('/fonts/Isidora.Sans/IsidoraSans-SemiBold.ttf') format('truetype'),
+    url('/fonts/Isidora.Sans/IsidoraSans-SemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Isidora Sans';
+  src: url('/fonts/Isidora.Sans/IsidoraSans-Bold.ttf') format('truetype'),
+    url('/fonts/Isidora.Sans/IsidoraSans-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Isidora Sans';
+  src: url('/fonts/Isidora.Sans/IsidoraSans-Light.ttf') format('truetype'),
+    url('/fonts/Isidora.Sans/IsidoraSans-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* ============================================
+   CSS VARIABLES (Theme)
+   ============================================ */
+
+:root {
+  /* Brand Colors */
+  --primary: 316 84% 45%;
+  /* #e830ce - Rosa Vibrante */
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 240 100% 57%;
+  /* #2323ff - Azul Eléctrico */
+  --secondary-foreground: 0 0% 100%;
+
+  --accent: 153 92% 58%;
+  /* #2ef8a0 - Verde Menta */
+  --accent-foreground: 0 0% 0%;
+
+  --danger: 354 73% 52%;
+  /* #dd2b3a - Rojo */
+  --danger-foreground: 0 0% 100%;
+
+  --warning: 19 88% 54%;
+  /* #f26222 - Naranja */
+  --warning-foreground: 0 0% 100%;
+
+  /* Base colors (shadcn/ui compatible) */
+  --background: 0 0% 98%;
+  /* Near white */
+  --foreground: 222 47% 12%;
+  /* Deep slate */
+
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 12%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 12%;
+
+  --muted: 210 20% 95%;
+  --muted-foreground: 215 16% 46%;
+
+  --border: 220 13% 88%;
+  --input: 220 13% 88%;
+  --ring: 316 84% 55%;
+  /* Primary color for focus rings */
+
+  --destructive: 354 73% 52%;
+  --destructive-foreground: 0 0% 100%;
+
+  /* Radius */
+  --radius: 0.75rem;
+
+
+  /* Chart colors for analytics */
+  --chart-1: 316 84% 55%;
+  --chart-2: 240 100% 57%;
+  --chart-3: 153 92% 58%;
+  --chart-4: 354 73% 52%;
+  --chart-5: 19 88% 54%;
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased relative;
+    font-family: 'Isidora Sans', var(--font-geist-sans), system-ui, sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Averox', var(--font-geist-sans), system-ui, sans-serif;
+    @apply font-bold tracking-tight;
+  }
+
+  /* Global section spacing - 80px between sections */
+  section+section {
+    @apply mt-16 md:mt-20;
+  }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+@layer utilities {
+
+  /* Font utilities */
+  .font-averox {
+    font-family: 'Averox', system-ui, sans-serif;
+  }
+
+  .font-isidora {
+    font-family: 'Isidora Sans', system-ui, sans-serif;
+  }
+
+  /* Gradient text */
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #e830ce 0%, #2323ff 50%, #2ef8a0 100%);
+  }
+
+  .text-gradient-primary {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #e830ce 0%, #2323ff 100%);
+  }
+
+  /* Glassmorphism */
+  .glassmorphism {
+    @apply backdrop-blur-xl border border-white/10;
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .glassmorphism-dark {
+    @apply backdrop-blur-xl border border-white/5;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  /* Glow effects */
+  .glow-primary {
+    box-shadow: 0 0 40px rgba(232, 48, 206, 0.3);
+  }
+
+  .glow-secondary {
+    box-shadow: 0 0 40px rgba(35, 35, 255, 0.3);
+  }
+
+  .glow-accent {
+    box-shadow: 0 0 40px rgba(46, 248, 160, 0.3);
+  }
+
+  /* Hover glow effects */
+  .hover-glow-primary:hover {
+    box-shadow: 0 0 60px rgba(232, 48, 206, 0.4);
+  }
+
+  /* Animation utilities */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .animate-gradient {
+    animation: gradient-shift 8s ease infinite;
+    background-size: 200% 200%;
+  }
+
+  .enter-up {
+    animation: enter-up 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    will-change: transform, opacity, filter;
+  }
+
+  .enter-left {
+    animation: enter-left 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    will-change: transform, opacity, filter;
+  }
+
+  .enter-right {
+    animation: enter-right 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    will-change: transform, opacity, filter;
+  }
+
+  .labs-marquee {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .labs-marquee::before,
+  .labs-marquee::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .labs-marquee::before {
+    left: 0;
+    background: linear-gradient(90deg, rgba(248, 250, 252, 1) 0%, rgba(248, 250, 252, 0) 100%);
+  }
+
+  .labs-marquee::after {
+    right: 0;
+    background: linear-gradient(270deg, rgba(248, 250, 252, 1) 0%, rgba(248, 250, 252, 0) 100%);
+  }
+
+  .labs-marquee__track {
+    display: flex;
+    gap: 1rem;
+    width: max-content;
+    animation: labs-marquee 28s linear infinite;
+  }
+
+  .labs-marquee:hover .labs-marquee__track {
+    animation-play-state: paused;
+  }
+
+  .labs-marquee__card {
+    min-width: 260px;
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ============================================
+   KEYFRAMES
+   ============================================ */
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(232, 48, 206, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 40px rgba(232, 48, 206, 0.6);
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes enter-up {
+  0% {
+    opacity: 0;
+    transform: translateY(36px) scale(0.97);
+    filter: blur(6px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes enter-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-42px) scale(0.97);
+    filter: blur(6px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes enter-right {
+  0% {
+    opacity: 0;
+    transform: translateX(42px) scale(0.97);
+    filter: blur(6px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes labs-marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* ============================================
+   SCROLLBAR STYLING
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary) / 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.7);
+}
+
+/* ============================================
+   CUSTOM ANIMATIONS
+   ============================================ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.4s ease-out;
+}
+
+/* ProfileCard Holographic Animation */
+.pc-shine-anim {
+  animation: holo-drift 12s linear infinite;
+  animation-play-state: running;
+  will-change: background-position;
+  background-size: cover;
+  mix-blend-mode: color-dodge;
+  filter: brightness(0.66) contrast(1.1) saturate(0.33) opacity(0.5) blur(30px);
+  z-index: 10;
+  pointer-events: none;
+}
+
+@keyframes holo-drift {
+  0% {
+    background-position: 50% 50%, 0% 0%, 50% 50%;
+  }
+
+  100% {
+    background-position: 50% 50%, 200% 200%, 50% 50%;
+  }
+}
+
+/* Missing shine animation for Benefits section */
+.animate-shine {
+  animation: shine 8s linear infinite;
+}
+
+@keyframes shine {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -200% 0;
+  }
+}

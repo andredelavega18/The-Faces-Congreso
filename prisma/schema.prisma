@@ -1,0 +1,203 @@
+// Prisma schema for The Faces 2026
+// Database: PostgreSQL (Supabase)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ============================================
+// Configuración del sitio
+// ============================================
+model SiteConfig {
+  id        String   @id @default(uuid()) @db.Uuid
+  key       String   @unique @db.VarChar(100)
+  value     Json
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+  updatedBy String?  @map("updated_by") @db.Uuid
+
+  @@index([key])
+  @@map("site_config")
+}
+
+// ============================================
+// Speakers / Ponentes
+// ============================================
+model Speaker {
+  id           String   @id @default(uuid()) @db.Uuid
+  name         String   @db.VarChar(255)
+  title        String?  @db.VarChar(255)
+  country      String?  @db.VarChar(100)
+  countryFlag  String?  @map("country_flag") @db.VarChar(10)
+  bio          String?  @db.Text
+  description  String?  @db.Text
+  specialties  String[] @default([])
+  imageUrl     String?  @map("image_url") @db.Text
+  mainImageUrl String?  @map("main_image_url") @db.Text
+  displayOrder Int      @default(0) @map("display_order")
+  isActive     Boolean  @default(true) @map("is_active")
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt    DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  @@index([isActive])
+  @@index([displayOrder])
+  @@map("speakers")
+}
+
+// ============================================
+// Secciones del evento (landing dinámica)
+// ============================================
+model EventSection {
+  id           String   @id @default(uuid()) @db.Uuid
+  sectionKey   String   @unique @map("section_key") @db.VarChar(100)
+  sectionName  String   @map("section_name") @db.VarChar(255)
+  content      Json
+  isVisible    Boolean  @default(true) @map("is_visible")
+  displayOrder Int      @default(0) @map("display_order")
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt    DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  @@index([isVisible])
+  @@index([displayOrder])
+  @@map("event_sections")
+}
+
+// ============================================
+// Configuración de Checkouts
+// ============================================
+model CheckoutConfig {
+  id           String   @id @default(uuid()) @db.Uuid
+  checkoutKey  String   @unique @map("checkout_key") @db.VarChar(50)
+  packageName  String   @map("package_name") @db.VarChar(100)
+  packageType  String   @map("package_type") @db.VarChar(50)
+  price        Decimal  @db.Decimal(10, 2)
+  currency     String   @default("USD") @db.VarChar(3)
+  redirectUrl  String   @map("redirect_url") @db.Text
+  thankYouUrl  String?  @map("thank_you_url") @db.Text
+  isActive     Boolean  @default(true) @map("is_active")
+  metadata     Json?
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt    DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  registrations Registration[]
+
+  @@index([isActive])
+  @@index([packageType])
+  @@map("checkout_configs")
+}
+
+// ============================================
+// Registros de inscripciones
+// ============================================
+model Registration {
+  id              String    @id @default(uuid()) @db.Uuid
+  checkoutId      String?   @map("checkout_id") @db.Uuid
+  email           String    @db.VarChar(255)
+  fullName        String    @map("full_name") @db.VarChar(255)
+  phone           String?   @db.VarChar(50)
+  country         String?   @db.VarChar(100)
+  paymentStatus   String    @default("pending") @map("payment_status") @db.VarChar(50)
+  paymentProvider String?   @map("payment_provider") @db.VarChar(50)
+  paymentId       String?   @map("payment_id") @db.VarChar(255)
+  amountPaid      Decimal?  @map("amount_paid") @db.Decimal(10, 2)
+  metadata        Json?
+  registeredAt    DateTime  @default(now()) @map("registered_at") @db.Timestamptz
+  updatedAt       DateTime  @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  checkout CheckoutConfig? @relation(fields: [checkoutId], references: [id])
+
+  @@index([email])
+  @@index([paymentStatus])
+  @@index([checkoutId])
+  @@map("registrations")
+}
+
+// ============================================
+// Assets multimedia
+// ============================================
+model MediaAsset {
+  id            String   @id @default(uuid()) @db.Uuid
+  assetType     String   @map("asset_type") @db.VarChar(50)
+  assetCategory String?  @map("asset_category") @db.VarChar(100)
+  fileName      String   @map("file_name") @db.VarChar(255)
+  fileUrl       String   @map("file_url") @db.Text
+  fileSize      Int?     @map("file_size")
+  mimeType      String?  @map("mime_type") @db.VarChar(100)
+  metadata      Json?
+  uploadedBy    String?  @map("uploaded_by") @db.Uuid
+  createdAt     DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  @@index([assetType])
+  @@index([assetCategory])
+  @@map("media_assets")
+}
+
+// ============================================
+// Sponsors / Patrocinadores
+// ============================================
+model Sponsor {
+  id           String   @id @default(uuid()) @db.Uuid
+  name         String   @db.VarChar(255)
+  logoUrl      String?  @map("logo_url") @db.Text
+  websiteUrl   String?  @map("website_url") @db.Text
+  sponsorTier  String?  @map("sponsor_tier") @db.VarChar(50)
+  displayOrder Int      @default(0) @map("display_order")
+  isActive     Boolean  @default(true) @map("is_active")
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt    DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  @@index([isActive])
+  @@index([sponsorTier])
+  @@map("sponsors")
+}
+
+// ============================================
+// Analytics Events
+// ============================================
+model AnalyticsEvent {
+  id        String   @id @default(uuid()) @db.Uuid
+  eventType String   @map("event_type") @db.VarChar(100)
+  eventData Json?    @map("event_data")
+  userId    String?  @map("user_id") @db.Uuid
+  sessionId String?  @map("session_id") @db.VarChar(255)
+  ipAddress String?  @map("ip_address") @db.VarChar(45)
+  userAgent String?  @map("user_agent") @db.Text
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  @@index([eventType])
+  @@index([createdAt])
+  @@map("analytics_events")
+}
+
+// ============================================
+// Libro de Reclamaciones
+// ============================================
+model Claim {
+  id              String   @id @default(uuid()) @db.Uuid
+  claimNumber     Int      @default(autoincrement()) @map("claim_number")
+  claimCode       String?  @unique @map("claim_code") @db.VarChar(50)
+  consumerName    String   @map("consumer_name") @db.VarChar(255)
+  documentType    String   @map("document_type") @db.VarChar(50)
+  documentNumber  String   @map("document_number") @db.VarChar(30)
+  email           String   @db.VarChar(255)
+  phone           String?  @db.VarChar(50)
+  address         String   @db.VarChar(255)
+  requestType     String   @map("request_type") @db.VarChar(20) // Reclamo | Queja
+  serviceType     String   @map("service_type") @db.VarChar(50) // Presencial | Virtual
+  orderNumber     String?  @map("order_number") @db.VarChar(50)
+  incidentDate    DateTime @map("incident_date") @db.Date
+  claimedAmount   Decimal? @map("claimed_amount") @db.Decimal(10, 2)
+  description     String   @db.Text
+  requestDetail   String   @map("request_detail") @db.Text
+  status          String   @default("Pendiente") @db.VarChar(30)
+  createdAt       DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt       DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  @@index([status])
+  @@map("claims")
+}
