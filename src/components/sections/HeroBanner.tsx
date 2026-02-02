@@ -73,7 +73,6 @@ export function HeroBanner({
         { href: '/', label: 'Inicio' },
         { href: '/#methodology', label: 'Metodologia' },
         { href: '/#speakers', label: 'Speakers' },
-        { href: 'https://master.thefacescongreso.com', label: 'Entradas', external: true },
         { href: '/#venue', label: 'Ubicacion' },
     ];
 
