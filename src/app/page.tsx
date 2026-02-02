@@ -146,11 +146,12 @@ function renderSection(
 }
 
 // Define the strict order of sections
+// NOTE: 'tickets' removed from display but checkout pages still work
 const SECTION_ORDER = [
     'hero',
     'video',
     'methodology', // Previously 'intro' in some contexts
-    'tickets',
+    // 'tickets', // Hidden - redirecting to master.thefacescongreso.com
     'speakers',
     'labs',
     'instagram',
