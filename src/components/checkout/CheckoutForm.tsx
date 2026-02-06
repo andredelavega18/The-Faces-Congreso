@@ -111,11 +111,18 @@ export function CheckoutForm({ checkoutKey, packageName, price, currency, source
 
     function onPayClick(data: FormData) {
         const amount = Math.round(price * data.quantity * 100);
+        const publicKey = process.env.NEXT_PUBLIC_CULQI_PUBLIC_KEY;
+
+        console.log('Culqi Public Key:', publicKey ? 'Configurada' : 'NO CONFIGURADA');
 
         // @ts-ignore
         if (window.Culqi) {
+            if (!publicKey) {
+                setState({ error: 'Error de configuración: Falta la clave pública de Culqi.' });
+                return;
+            }
             // @ts-ignore
-            window.Culqi.publicKey = process.env.NEXT_PUBLIC_CULQI_PUBLIC_KEY || 'pk_test_sample';
+            window.Culqi.publicKey = publicKey;
             // @ts-ignore
             window.Culqi.settings({
                 title: packageName,
@@ -126,7 +133,7 @@ export function CheckoutForm({ checkoutKey, packageName, price, currency, source
             // @ts-ignore
             window.Culqi.options({
                 style: {
-                    logo: 'https://thefaces.com/logo.png',
+                    logo: '/logos/logo.svg',
                     maincolor: '#000000',
                 },
             });
@@ -137,6 +144,7 @@ export function CheckoutForm({ checkoutKey, packageName, price, currency, source
             setState({ error: 'Error: La pasarela de pago no cargo correctamente. Recarga la pagina.' });
         }
     }
+
 
     const router = useRouter();
 
