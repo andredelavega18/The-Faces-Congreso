@@ -68,6 +68,22 @@ export function CheckoutForm({ checkoutKey, packageName, price, currency, source
     const quantity = form.watch('quantity') || 1;
     const totalPrice = price * quantity;
     const acceptTerms = form.watch('acceptTerms') ?? false;
+    const [culqiReady, setCulqiReady] = useState(false);
+
+    // Inicializar Culqi cuando el script carga
+    const handleCulqiLoad = () => {
+        const publicKey = process.env.NEXT_PUBLIC_CULQI_PUBLIC_KEY;
+        console.log('Culqi script loaded, initializing with key:', publicKey ? `${publicKey.substring(0, 10)}...` : 'NOT SET');
+
+        // @ts-ignore
+        if (window.Culqi && publicKey) {
+            // @ts-ignore
+            window.Culqi.publicKey = publicKey;
+            setCulqiReady(true);
+            console.log('Culqi initialized successfully');
+        }
+    };
+
 
     useEffect(() => {
         // @ts-ignore
@@ -111,22 +127,9 @@ export function CheckoutForm({ checkoutKey, packageName, price, currency, source
 
     function onPayClick(data: FormData) {
         const amount = Math.round(price * data.quantity * 100);
-        const publicKey = process.env.NEXT_PUBLIC_CULQI_PUBLIC_KEY;
-
-        // Debug: mostrar parte de la clave para verificar
-        console.log('Culqi Public Key:', publicKey ? 'Configurada' : 'NO CONFIGURADA');
-        console.log('Key preview:', publicKey ? `${publicKey.substring(0, 10)}...${publicKey.substring(publicKey.length - 5)}` : 'undefined');
-        console.log('Key length:', publicKey?.length);
-
 
         // @ts-ignore
-        if (window.Culqi) {
-            if (!publicKey) {
-                setState({ error: 'Error de configuración: Falta la clave pública de Culqi.' });
-                return;
-            }
-            // @ts-ignore
-            window.Culqi.publicKey = publicKey;
+        if (window.Culqi && culqiReady) {
             // @ts-ignore
             window.Culqi.settings({
                 title: packageName,
@@ -175,7 +178,7 @@ export function CheckoutForm({ checkoutKey, packageName, price, currency, source
 
     return (
         <div className="grid gap-8 md:grid-cols-2 max-w-4xl mx-auto">
-            <Script src="https://checkout.culqi.com/js/v4" strategy="lazyOnload" />
+            <Script src="https://checkout.culqi.com/js/v4" strategy="afterInteractive" onLoad={handleCulqiLoad} />
 
             <div className="space-y-6">
                 <div className="rounded-2xl border border-slate-200 bg-white shadow-[0_20px_50px_rgba(15,23,42,0.12)] p-6">
