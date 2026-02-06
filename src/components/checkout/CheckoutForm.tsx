@@ -73,14 +73,12 @@ export function CheckoutForm({ checkoutKey, packageName, price, currency, source
     // Inicializar Culqi cuando el script carga
     const handleCulqiLoad = () => {
         const publicKey = process.env.NEXT_PUBLIC_CULQI_PUBLIC_KEY;
-        console.log('Culqi script loaded, initializing with key:', publicKey ? `${publicKey.substring(0, 10)}...` : 'NOT SET');
 
         // @ts-ignore
         if (window.Culqi && publicKey) {
             // @ts-ignore
             window.Culqi.publicKey = publicKey;
             setCulqiReady(true);
-            console.log('Culqi initialized successfully');
         }
     };
 
