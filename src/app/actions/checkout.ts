@@ -81,7 +81,8 @@ export async function createRegistration(
                         source_id: culqiToken,
                         description: `Compra: ${checkoutConfig.packageName} (x${quantity})`,
                         antifraud_details: {
-                            phone_number: phone,
+                            // Limpiar teléfono: solo dígitos, máximo 15 caracteres
+                            phone_number: phone.replace(/\D/g, '').slice(0, 15),
                         },
                     }),
                 });
