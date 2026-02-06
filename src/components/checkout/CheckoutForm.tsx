@@ -113,7 +113,11 @@ export function CheckoutForm({ checkoutKey, packageName, price, currency, source
         const amount = Math.round(price * data.quantity * 100);
         const publicKey = process.env.NEXT_PUBLIC_CULQI_PUBLIC_KEY;
 
+        // Debug: mostrar parte de la clave para verificar
         console.log('Culqi Public Key:', publicKey ? 'Configurada' : 'NO CONFIGURADA');
+        console.log('Key preview:', publicKey ? `${publicKey.substring(0, 10)}...${publicKey.substring(publicKey.length - 5)}` : 'undefined');
+        console.log('Key length:', publicKey?.length);
+
 
         // @ts-ignore
         if (window.Culqi) {
