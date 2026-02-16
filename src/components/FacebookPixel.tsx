@@ -1,32 +1,8 @@
 'use client';
 
 import Script from 'next/script';
-import { usePathname } from 'next/navigation';
-import { useEffect } from 'react';
-
-declare global {
-    interface Window {
-        fbq: (...args: unknown[]) => void;
-    }
-}
 
 export function FacebookPixel() {
-    const pathname = usePathname();
-
-    useEffect(() => {
-        // Fire PageView on every route change
-        if (typeof window !== 'undefined' && window.fbq) {
-            window.fbq('track', 'PageView');
-        }
-
-        // Fire InitiateCheckout when visiting checkout pages
-        if (pathname?.startsWith('/checkout')) {
-            if (typeof window !== 'undefined' && window.fbq) {
-                window.fbq('track', 'InitiateCheckout');
-            }
-        }
-    }, [pathname]);
-
     return (
         <>
             <Script id="facebook-pixel" strategy="afterInteractive">
@@ -41,6 +17,7 @@ export function FacebookPixel() {
                     'https://connect.facebook.net/en_US/fbevents.js');
                     fbq('init', '1546145490022800');
                     fbq('track', 'PageView');
+                    fbq('track', 'InitiateCheckout');
                 `}
             </Script>
             <noscript>
