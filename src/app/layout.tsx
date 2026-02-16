@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
+import { FacebookPixel } from '@/components/FacebookPixel';
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -95,6 +96,7 @@ export default function RootLayout({
             <body
                 className={`${geistSans.variable} ${geistMono.variable} min-h-screen font-sans antialiased relative`}
             >
+                <FacebookPixel />
                 {children}
             </body>
         </html>

@@ -3,7 +3,6 @@ import { redirect } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
 import { CheckoutForm } from '@/components/checkout/CheckoutForm';
 import { HeroBanner, FooterSection } from '@/components/sections';
-import { FacebookPixel } from '@/components/FacebookPixel';
 
 interface CheckoutPageProps {
     searchParams: Promise<{ key?: string; source?: string }>;
@@ -60,7 +59,6 @@ export default async function CheckoutPage(props: CheckoutPageProps) {
 
     return (
         <main className="min-h-screen bg-slate-50">
-            <FacebookPixel />
             <HeroBanner
                 title="Finaliza tu Inscripción"
                 showMeta={false}
