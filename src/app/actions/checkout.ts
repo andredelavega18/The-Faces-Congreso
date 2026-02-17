@@ -3,7 +3,7 @@
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
 import { revalidatePath } from 'next/cache';
-import { sendPurchaseConfirmation } from '@/lib/resend';
+
 
 const checkoutSchema = z.object({
     checkoutKey: z.string(),
@@ -145,17 +145,7 @@ export async function createRegistration(
             });
 
             // Enviar correo de confirmación
-            if (paymentStatus === 'paid' || paymentStatus === 'pending_dev') {
-                await sendPurchaseConfirmation({
-                    customerName: fullName,
-                    customerEmail: email,
-                    packageName: checkoutConfig.packageName,
-                    quantity: quantity,
-                    amount: totalPrice,
-                    currency: checkoutConfig.currency,
-                    ticketId: registration.id,
-                });
-            }
+
         } catch (e) {
             console.error('Analytics or Email error:', e);
         }
