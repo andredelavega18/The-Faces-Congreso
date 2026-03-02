@@ -157,24 +157,6 @@ model Sponsor {
 }
 
 // ============================================
-// Analytics Events
-// ============================================
-model AnalyticsEvent {
-  id        String   @id @default(uuid()) @db.Uuid
-  eventType String   @map("event_type") @db.VarChar(100)
-  eventData Json?    @map("event_data")
-  userId    String?  @map("user_id") @db.Uuid
-  sessionId String?  @map("session_id") @db.VarChar(255)
-  ipAddress String?  @map("ip_address") @db.VarChar(45)
-  userAgent String?  @map("user_agent") @db.Text
-  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
-
-  @@index([eventType])
-  @@index([createdAt])
-  @@map("analytics_events")
-}
-
-// ============================================
 // Libro de Reclamaciones
 // ============================================
 model Claim {

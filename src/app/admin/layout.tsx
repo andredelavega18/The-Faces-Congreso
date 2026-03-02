@@ -7,7 +7,6 @@ import {
     Calendar,
     Settings,
     Image as ImageIcon,
-    BarChart3,
     FileText,
     ChevronLeft,
     Menu,
@@ -34,7 +33,6 @@ const sidebarLinks = [
     { href: '/admin/claims', label: 'Reclamos', icon: FileText },
     { href: '/admin/sections', label: 'Secciones', icon: FileText },
     { href: '/admin/media', label: 'Media', icon: ImageIcon },
-    { href: '/admin/analytics', label: 'Analytics', icon: BarChart3 },
     { href: '/admin/config', label: 'Configuración', icon: Settings },
 ];
 

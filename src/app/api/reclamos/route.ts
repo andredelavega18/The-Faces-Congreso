@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
+import { sendEmail } from '@/lib/mail';
 
 const claimSchema = z.object({
     consumerName: z.string().min(3),
@@ -24,43 +25,6 @@ function buildClaimCode(sequence: number) {
     return `TFMI-2026-${padded}`;
 }
 
-async function sendEmail({
-    to,
-    subject,
-    html,
-}: {
-    to: string;
-    subject: string;
-    html: string;
-}) {
-    const apiKey = process.env.RESEND_API_KEY;
-    const from = process.env.RESEND_FROM || 'no-reply@thefaces2026.com';
-
-    if (!apiKey) {
-        return { ok: false, error: 'RESEND_API_KEY not configured' };
-    }
-
-    const res = await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: {
-            Authorization: `Bearer ${apiKey}`,
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            from,
-            to,
-            subject,
-            html,
-        }),
-    });
-
-    if (!res.ok) {
-        const errorText = await res.text();
-        return { ok: false, error: errorText };
-    }
-
-    return { ok: true };
-}
 
 export async function POST(request: NextRequest) {
     try {

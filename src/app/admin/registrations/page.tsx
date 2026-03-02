@@ -83,7 +83,12 @@ async function RegistrationsTable() {
                                             : '-'}
                                     </TableCell>
                                     <TableCell className="text-sm text-muted-foreground">
-                                        {new Date(reg.registeredAt).toLocaleDateString('es-PE')}
+                                        {new Date(reg.registeredAt).toLocaleString('es-PE', {
+                                            timeZone: 'America/Lima',
+                                            day: '2-digit',
+                                            month: '2-digit',
+                                            year: 'numeric'
+                                        })}
                                     </TableCell>
                                 </TableRow>
                             ))}

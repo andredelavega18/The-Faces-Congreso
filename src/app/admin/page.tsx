@@ -140,7 +140,13 @@ async function DashboardStats() {
                                             {reg.paymentStatus}
                                         </Badge>
                                         <span className="text-xs text-muted-foreground">
-                                            {reg.checkout?.packageName || 'N/A'}
+                                            {new Date(reg.registeredAt).toLocaleString('es-PE', {
+                                                timeZone: 'America/Lima',
+                                                day: '2-digit',
+                                                month: '2-digit',
+                                                hour: '2-digit',
+                                                minute: '2-digit'
+                                            })}
                                         </span>
                                     </div>
                                 </div>

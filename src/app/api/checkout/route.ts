@@ -32,22 +32,6 @@ export async function GET(request: Request) {
             );
         }
 
-        // Log analytics event
-        try {
-            await prisma.analyticsEvent.create({
-                data: {
-                    eventType: 'checkout_redirect',
-                    eventData: {
-                        checkoutKey: key,
-                        packageName: checkout.packageName,
-                        price: checkout.price,
-                    },
-                },
-            });
-        } catch (analyticsError) {
-            console.error('Error logging analytics:', analyticsError);
-            // Don't fail the redirect if analytics fails
-        }
 
         // Redirect to System.io checkout URL
         return NextResponse.redirect(checkout.redirectUrl);
