@@ -44,15 +44,19 @@ function ResendEmailButton({ registration }: { registration: Registration }) {
                 body: JSON.stringify({ registrationId: registration.id }),
             });
 
+            const data = await res.json();
+
             if (res.ok) {
                 setStatus('success');
                 setTimeout(() => setStatus('idle'), 3000);
             } else {
                 setStatus('error');
+                alert(`Error al enviar correo: ${data.error || 'Error desconocido'}`);
                 setTimeout(() => setStatus('idle'), 3000);
             }
-        } catch {
+        } catch (err) {
             setStatus('error');
+            alert(`Error de conexión: ${err instanceof Error ? err.message : String(err)}`);
             setTimeout(() => setStatus('idle'), 3000);
         }
     }

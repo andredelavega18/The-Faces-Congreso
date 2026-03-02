@@ -2,6 +2,13 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { sendEmail } from '@/lib/mail';
 
+export async function GET() {
+    return NextResponse.json(
+        { error: 'Usa POST para enviar correos' },
+        { status: 405 }
+    );
+}
+
 export async function POST(request: NextRequest) {
     try {
         const { registrationId } = await request.json();
@@ -117,10 +124,17 @@ export async function POST(request: NextRequest) {
         if (result.ok) {
             return NextResponse.json({ success: true, message: 'Correo enviado correctamente' });
         } else {
-            return NextResponse.json({ error: 'Error al enviar el correo' }, { status: 500 });
+            console.error('Email send failed:', result.error);
+            return NextResponse.json(
+                { error: `Error al enviar: ${result.error instanceof Error ? result.error.message : String(result.error)}` },
+                { status: 500 }
+            );
         }
     } catch (error) {
         console.error('Error resending email:', error);
-        return NextResponse.json({ error: 'Error interno del servidor' }, { status: 500 });
+        return NextResponse.json(
+            { error: `Error interno: ${error instanceof Error ? error.message : String(error)}` },
+            { status: 500 }
+        );
     }
 }
