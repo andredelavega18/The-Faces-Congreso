@@ -1,17 +1,29 @@
 import nodemailer from 'nodemailer';
 
-const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: parseInt(process.env.SMTP_PORT || '587'),
-    secure: parseInt(process.env.SMTP_PORT || '587') === 465, // true only for 465
-    auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-    },
-    tls: {
-        rejectUnauthorized: false, // Accept self-signed certs from hosting providers
-    },
-});
+const isGmail = (process.env.SMTP_HOST || '').includes('gmail');
+
+const transporter = nodemailer.createTransport(
+    isGmail
+        ? {
+            service: 'gmail',
+            auth: {
+                user: process.env.SMTP_USER,
+                pass: process.env.SMTP_PASS,
+            },
+        }
+        : {
+            host: process.env.SMTP_HOST,
+            port: parseInt(process.env.SMTP_PORT || '587'),
+            secure: parseInt(process.env.SMTP_PORT || '587') === 465,
+            auth: {
+                user: process.env.SMTP_USER,
+                pass: process.env.SMTP_PASS,
+            },
+            tls: {
+                rejectUnauthorized: false,
+            },
+        }
+);
 
 export async function sendEmail({
     to,
