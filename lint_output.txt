@@ -1,0 +1,20 @@
+﻿
+> the-faces-2026@0.1.0 lint C:\Users\Andre Cahuana\Desktop\THE FACES CONGRESO
+> next lint
+
+node.exe : Invalid project directory provided, no 
+such directory: C:\Users\Andre Cahuana\Desktop\THE 
+FACES CONGRESO\lint
+En C:\Users\Andre 
+Cahuana\AppData\Roaming\npm\pnpm.ps1: 24 Carácter: 
+5
++     & "node$exe"  
+"$basedir/node_modules/pnpm/bin/pnpm.cjs" $args
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Inval 
+   id project...S CONGRESO\lint:String) [], Remot  
+  eException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.

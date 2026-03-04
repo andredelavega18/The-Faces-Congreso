@@ -2,6 +2,13 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { createClient } from '@supabase/supabase-js';
 
+// Configuration for large file uploads (Vercel/Next.js limit)
+export const config = {
+    api: {
+        bodyParser: false, // Disabling Next.js built-in body parser to use Request.formData() without limits
+    },
+};
+
 // Create Supabase client with service role for storage operations
 const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,

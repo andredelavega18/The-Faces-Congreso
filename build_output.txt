@@ -1,0 +1,161 @@
+﻿
+> the-faces-2026@0.1.0 build C:\Users\Andre Cahuana\Desktop\THE FACES CONGRESO
+> next build
+
+Ôû▓ Next.js 16.1.6 (Turbopack)
+- Environments: .env.local
+- Experiments (use with caution):
+  ┬À optimizePackageImports
+  ┬À serverActions
+
+node.exe : ÔÜá The "middleware" file convention is 
+deprecated. Please use "proxy" instead. Learn 
+more: https://nextjs.org/docs/messages/middleware-t
+o-proxy
+En C:\Users\Andre 
+Cahuana\AppData\Roaming\npm\pnpm.ps1: 24 Carácter: 
+5
++     & "node$exe"  
+"$basedir/node_modules/pnpm/bin/pnpm.cjs" $args
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (ÔÜá T 
+   he "middle...leware-to-proxy:String) [], Remot  
+  eException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  Creating an optimized production build ...
+Ô£ô Compiled successfully in 9.2s
+  Running TypeScript ...
+  Collecting page data using 15 workers ...
+  Generating static pages using 15 workers (0/26) ...
+  Generating static pages using 15 workers (6/26) 
+Ô£à Service Role Key seems distinct from Anon Key.
+­ƒöæ Anon Key Prefix: eyJhb...
+­ƒöæ Service Key Prefix: eyJhb...
+  Generating static pages using 15 workers (12/26) 
+prisma:error 
+Invalid `prisma.speaker.count()` invocation:
+
+
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+prisma:error 
+Invalid `prisma.checkoutConfig.count()` invocation:
+
+
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+prisma:error 
+Invalid `prisma.registration.count()` invocation:
+
+
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+prisma:error 
+Invalid `prisma.registration.findMany()` invocation:
+
+
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+prisma:error 
+Invalid `prisma.registration.findMany()` invocation:
+
+
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+prisma:error 
+Invalid `prisma.siteConfig.findMany()` invocation:
+
+
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+prisma:error 
+Invalid `prisma.speaker.findMany()` invocation:
+
+
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+prisma:error 
+Invalid `prisma.checkoutConfig.findMany()` invocation:
+
+
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+prisma:error 
+Invalid `prisma.eventSection.findMany()` invocation:
+
+
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+prisma:error 
+Invalid `prisma.mediaAsset.findMany()` invocation:
+
+
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+Error occurred prerendering page "/". Read more: 
+https://nextjs.org/docs/messages/prerender-error
+Error [PrismaClientInitializationError]: 
+Invalid `prisma.siteConfig.findMany()` invocation:
+
+
+Authentication failed against database server, the 
+provided database credentials for `postgres` are 
+not valid.
+
+Please make sure to provide valid database 
+credentials for the database server at the 
+configured address.
+    at async s (C:\Users\Andre Cahuana\Desktop\THE 
+FACES CONGRESO\.next\server\chunks\ssr\[root-of-the
+-server]__267b46f4._.js:1:6292)
+    at async u (C:\Users\Andre Cahuana\Desktop\THE 
+FACES CONGRESO\.next\server\chunks\ssr\[root-of-the
+-server]__267b46f4._.js:1:7190) {
+  clientVersion: '6.19.2',
+  errorCode: undefined,
+  retryable: undefined,
+  digest: '4072474569'
+}
+Export encountered an error on /page: /, exiting 
+the build.
+Error occurred prerendering page 
+"/admin/registrations". Read more: 
+https://nextjs.org/docs/messages/prerender-error
+Error [PrismaClientInitializationError]: 
+Invalid `prisma.registration.findMany()` 
+invocation:
+
+
+Authentication failed against database server, the 
+provided database credentials for `postgres` are 
+not valid.
+
+Please make sure to provide valid database 
+credentials for the database server at the 
+configured address.
+    at async t (C:\Users\Andre Cahuana\Desktop\THE 
+FACES CONGRESO\.next\server\chunks\ssr\[root-of-the
+-server]__13f10db3._.js:1:4704) {
+  clientVersion: '6.19.2',
+  errorCode: undefined,
+  retryable: undefined,
+  digest: '280312566'
+}
+Export encountered an error on 
+/admin/registrations/page: /admin/registrations, 
+exiting the build.
+Ô¿» Next.js build worker exited with code: 1 and 
+signal: null
+ÔÇëELIFECYCLEÔÇë Command failed with exit code 1.

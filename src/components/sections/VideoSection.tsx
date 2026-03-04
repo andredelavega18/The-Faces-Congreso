@@ -33,8 +33,8 @@ interface VideoSectionProps {
 
 export function VideoSection({ content }: VideoSectionProps) {
     const {
-        title = 'VIDEO 1',
-        videoUrl = 'https://bcwkitzndcbwnxidmxbx.supabase.co/storage/v1/object/public/videos/video-1.webm',
+        videoUrl = 'https://ajrxjgenovqrinshljdt.supabase.co/storage/v1/object/public/videos/video-1.webm',
+        title = 'Revive la Experiencia',
         posterUrl = '',
     } = content;
 

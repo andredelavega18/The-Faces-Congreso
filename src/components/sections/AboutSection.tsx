@@ -35,11 +35,14 @@ The Faces 2026 reunirá a expertos nacionales e internacionales con trayectoria 
     return (
         <section
             id="about"
-            className="relative py-16 px-4 sm:py-20 sm:px-6 md:py-24 md:px-8 bg-fixed bg-center bg-cover bg-neutral-950"
-            style={{
-                backgroundImage: "url('https://bcwkitzndcbwnxidmxbx.supabase.co/storage/v1/object/public/hero-images/1769493287587-Background_Quienes_Somos.webp')"
-            }}
+            className="relative py-16 px-4 sm:py-20 sm:px-6 md:py-24 md:px-8 bg-neutral-950"
         >
+            <div
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.10] mix-blend-luminosity"
+                style={{
+                    backgroundImage: "url('https://ajrxjgenovqrinshljdt.supabase.co/storage/v1/object/public/hero-images/1769493287587-Background_Quienes_Somos.webp')"
+                }}
+            />
             <div className="absolute inset-0 bg-black/85" />
 
             <div className="relative z-10 mx-auto max-w-5xl text-center">

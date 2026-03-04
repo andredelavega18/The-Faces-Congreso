@@ -17,6 +17,8 @@ import {
 } from '@/components/sections';
 import { Footer } from '@/components/layout/Footer';
 
+export const revalidate = 60; // Revalidate the page every 60 seconds
+
 async function getSiteData() {
     const [siteConfig, speakers, checkouts, sections, companyAssets] = await Promise.all([
         prisma.siteConfig.findMany(),
