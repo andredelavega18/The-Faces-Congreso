@@ -157,13 +157,11 @@ export function CheckoutForm({ checkoutKey, packageName, price, currency, source
         if (state.success) {
             if (state.thankYouUrl) {
                 window.location.href = state.thankYouUrl;
-            } else if (redirectUrl) {
-                window.location.href = redirectUrl;
             } else {
                 router.push(`/thank-you?key=${checkoutKey}`);
             }
         }
-    }, [state.success, state.thankYouUrl, router, checkoutKey, redirectUrl]);
+    }, [state.success, state.thankYouUrl, router, checkoutKey]);
 
     if (state.success) {
         return (
