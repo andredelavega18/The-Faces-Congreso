@@ -27,11 +27,8 @@ export function AboutSection({ content }: AboutSectionProps) {
 Un punto de encuentro para profesionales que buscan excelencia clínica, pensamiento crítico y liderazgo real en el sector estético.
 
 The Faces 2026 reunirá a expertos nacionales e internacionales con trayectoria científica sólida para compartir contenido de vanguardia, análisis clínico, enfoques innovadores y casos aplicados que marcarán la agenda científica y de práctica clínica del continente.`,
-        imageDesktop,
 
     } = content;
-
-    const bgImageUrl = imageDesktop || 'https://ajrxjgenovqrinshljdt.supabase.co/storage/v1/object/public/hero-images/1769493287587-Background_Quienes_Somos.webp';
 
     const paragraphs = parseParagraphs(description);
 
@@ -43,7 +40,7 @@ The Faces 2026 reunirá a expertos nacionales e internacionales con trayectoria 
             <div
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.10] mix-blend-luminosity"
                 style={{
-                    backgroundImage: `url('${bgImageUrl}')`
+                    backgroundImage: "url('https://ajrxjgenovqrinshljdt.supabase.co/storage/v1/object/public/hero-images/1769493287587-Background_Quienes_Somos.webp')"
                 }}
             />
             <div className="absolute inset-0 bg-black/85" />

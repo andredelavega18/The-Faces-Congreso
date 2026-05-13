@@ -48,10 +48,10 @@ export function LaboratoriesSection({ content, assets = [] }: LaboratoriesSectio
                         <div className="py-4">
                             <LogoLoop
                                 logos={logos}
-                                speed={85} // Increased speed to be visible (was 1.5)
+                                speed={85}
                                 direction="left"
-                                logoHeight={80} // Larger size
-                                gap={80} // More breathing room
+                                logoHeight={45}
+                                gap={50}
                                 pauseOnHover={true}
                                 fadeOut={true}
                                 fadeOutColor="#f8fafc" // Updated fade color to match bg-slate-50 (#f8fafc)

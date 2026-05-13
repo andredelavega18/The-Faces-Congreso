@@ -41,8 +41,8 @@ function FounderCard({ name, role, imageUrl, gradientDirection = 'left', delay =
             className="group relative w-full max-w-[380px] lg:max-w-[420px]"
         >
             <div
-                className="relative overflow-hidden rounded-[24px] sm:rounded-[28px] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] transition-all duration-500 group-hover:shadow-[0_30px_80px_-15px_rgba(232,48,206,0.4)] group-hover:-translate-y-2"
-                style={{ background: gradient }}
+                className="relative overflow-hidden rounded-[24px] sm:rounded-[28px] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] transition-all duration-500 group-hover:shadow-[0_30px_80px_-15px_rgba(232,48,206,0.4)] group-hover:-translate-y-2 flex flex-col"
+                style={{ background: gradient, aspectRatio: '3 / 4' }}
             >
                 {/* Subtle noise texture overlay */}
                 <div className="absolute inset-0 opacity-[0.04] mix-blend-overlay pointer-events-none"
@@ -50,7 +50,7 @@ function FounderCard({ name, role, imageUrl, gradientDirection = 'left', delay =
                 />
 
                 {/* Top section - Name and Role */}
-                <div className="relative z-10 pt-8 pb-4 px-6 sm:pt-10 sm:pb-5 sm:px-8 text-center">
+                <div className="relative z-10 pt-8 pb-4 px-6 sm:pt-10 sm:pb-5 sm:px-8 text-center" style={{ minHeight: '90px' }}>
                     <h3 className="font-averox text-lg sm:text-xl md:text-2xl font-bold uppercase tracking-[0.08em] text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)] leading-tight">
                         {name}
                     </h3>
@@ -60,8 +60,7 @@ function FounderCard({ name, role, imageUrl, gradientDirection = 'left', delay =
                 </div>
 
                 {/* Bottom section - Photo */}
-                <div className="relative z-10 flex justify-center items-end overflow-hidden"
-                    style={{ minHeight: '340px' }}
+                <div className="relative z-10 flex justify-center items-end overflow-hidden flex-1"
                 >
                     <img
                         src={imageUrl}
@@ -87,7 +86,7 @@ export function FoundersSection({ content, embedded = false }: FoundersSectionPr
         title = 'Fundadoras The Faces',
         subtitle = 'Liderazgo y visión que impulsan The Faces.',
         description = '',
-        founder1Name = 'DRA YEZENIA PARIONA SIHUIN',
+        founder1Name = 'DRA YEZENIA PARIONA',
         founder1Role = 'CEO',
         founder2Name = 'DRA CESVI VILLENA BEJAR',
         founder2Role = 'CEO',
