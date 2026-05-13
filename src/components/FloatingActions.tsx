@@ -14,9 +14,7 @@ export function FloatingActions({ whatsapp }: FloatingActionsProps) {
     return (
         <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-3">
             <a
-                href="https://master.thefacescongreso.com"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/#tickets"
                 className="rounded-full bg-primary px-6 py-4 text-base font-semibold text-white shadow-lg shadow-primary/30 transition hover:translate-y-[-1px] hover:bg-primary/90"
             >
                 Inscribete ahora

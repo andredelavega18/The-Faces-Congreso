@@ -86,27 +86,52 @@ export async function DELETE(
     try {
         const { id } = await context.params;
 
-        // Check for dependencies
-        const registrationCount = await prisma.registration.count({
-            where: { checkoutId: id }
+        // Fetch the checkout to get image info for cleanup
+        const checkout = await prisma.checkoutConfig.findUnique({
+            where: { id },
+            select: { metadata: true },
         });
 
-        if (registrationCount > 0) {
+        if (!checkout) {
             return NextResponse.json(
-                { error: `No se puede eliminar: Hay ${registrationCount} registro(s) asociados. Desactívalo en su lugar.` },
-                { status: 400 }
+                { error: 'Entrada no encontrada' },
+                { status: 404 }
             );
         }
 
+        // Disconnect any registrations by setting checkoutId to null
+        await prisma.registration.updateMany({
+            where: { checkoutId: id },
+            data: { checkoutId: null },
+        });
+
+        // Delete the checkout
         await prisma.checkoutConfig.delete({
             where: { id },
         });
+
+        // Try to delete the image from Supabase storage if it exists
+        const metadata = checkout.metadata as { imageUrl?: string } | null;
+        if (metadata?.imageUrl) {
+            try {
+                const { supabaseAdmin } = await import('@/lib/supabase/server');
+                // Extract file path from URL: .../storage/v1/object/public/tickets/filename.ext
+                const urlParts = metadata.imageUrl.split('/storage/v1/object/public/tickets/');
+                if (urlParts.length === 2 && urlParts[1]) {
+                    const filePath: string = urlParts[1];
+                    await supabaseAdmin.storage.from('tickets').remove([filePath]);
+                }
+            } catch (storageError) {
+                // Log but don't fail the delete operation
+                console.warn('Could not delete image from storage:', storageError);
+            }
+        }
 
         return NextResponse.json({ success: true });
     } catch (error) {
         console.error('Error deleting checkout:', error);
         return NextResponse.json(
-            { error: 'Error al eliminar el paquete. Verifica que no tenga datos relacionados.' },
+            { error: 'Error al eliminar el paquete.' },
             { status: 500 }
         );
     }

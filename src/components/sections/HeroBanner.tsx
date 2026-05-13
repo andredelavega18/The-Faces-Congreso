@@ -73,6 +73,7 @@ export function HeroBanner({
         { href: '/', label: 'Inicio' },
         { href: '/#methodology', label: 'Metodologia' },
         { href: '/#speakers', label: 'Speakers' },
+        { href: '/#tickets', label: 'Entradas' },
         { href: '/#venue', label: 'Ubicacion' },
     ];
 
@@ -219,9 +220,7 @@ export function HeroBanner({
                             className="pt-6"
                         >
                             <a
-                                href="https://master.thefacescongreso.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
+                                href="/#tickets"
                                 className="inline-flex items-center justify-center rounded-full bg-white/95 px-8 py-3 text-sm font-semibold uppercase tracking-[0.25em] text-slate-900 shadow-[0_12px_30px_rgba(0,0,0,0.18)] transition-all duration-300 border-2 border-transparent hover:scale-105 hover:bg-transparent hover:border-white hover:text-white sm:text-base"
                             >
                                 Adquiere tu entrada

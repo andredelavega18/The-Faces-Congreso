@@ -1,6 +1,5 @@
-﻿'use client';
+'use client';
 
-import ProfileCard from '@/components/ui/ProfileCard';
 import { motion } from 'framer-motion';
 
 export interface FoundersContent {
@@ -20,17 +19,78 @@ interface FoundersSectionProps {
     embedded?: boolean;
 }
 
+interface FounderCardProps {
+    name: string;
+    role: string;
+    imageUrl: string;
+    gradientDirection?: 'left' | 'right';
+    delay?: number;
+}
+
+function FounderCard({ name, role, imageUrl, gradientDirection = 'left', delay = 0 }: FounderCardProps) {
+    const gradient = gradientDirection === 'left'
+        ? 'linear-gradient(135deg, #2323ff 0%, #8a3dff 30%, #e830ce 60%, #ff6b6b 100%)'
+        : 'linear-gradient(225deg, #2323ff 0%, #8a3dff 30%, #e830ce 60%, #ff8c42 100%)';
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 40, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay, ease: 'easeOut' }}
+            className="group relative w-full max-w-[380px] lg:max-w-[420px]"
+        >
+            <div
+                className="relative overflow-hidden rounded-[24px] sm:rounded-[28px] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] transition-all duration-500 group-hover:shadow-[0_30px_80px_-15px_rgba(232,48,206,0.4)] group-hover:-translate-y-2"
+                style={{ background: gradient }}
+            >
+                {/* Subtle noise texture overlay */}
+                <div className="absolute inset-0 opacity-[0.04] mix-blend-overlay pointer-events-none"
+                    style={{ backgroundImage: 'url(/backgrounds/banner.svg)', backgroundSize: 'cover' }}
+                />
+
+                {/* Top section - Name and Role */}
+                <div className="relative z-10 pt-8 pb-4 px-6 sm:pt-10 sm:pb-5 sm:px-8 text-center">
+                    <h3 className="font-averox text-lg sm:text-xl md:text-2xl font-bold uppercase tracking-[0.08em] text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)] leading-tight">
+                        {name}
+                    </h3>
+                    <p className="mt-1.5 sm:mt-2 text-sm sm:text-base font-semibold uppercase tracking-[0.25em] text-white/90 drop-shadow-[0_1px_4px_rgba(0,0,0,0.2)]">
+                        {role}
+                    </p>
+                </div>
+
+                {/* Bottom section - Photo */}
+                <div className="relative z-10 flex justify-center items-end overflow-hidden"
+                    style={{ minHeight: '340px' }}
+                >
+                    <img
+                        src={imageUrl}
+                        alt={name}
+                        className="w-full max-w-[90%] object-contain object-bottom transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                        loading="lazy"
+                        style={{
+                            filter: 'brightness(1.05) contrast(1.02)',
+                            transformOrigin: 'bottom center',
+                        }}
+                    />
+                </div>
+
+                {/* Subtle gradient overlay at the bottom for depth */}
+                <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black/10 to-transparent pointer-events-none z-[5]" />
+            </div>
+        </motion.div>
+    );
+}
+
 export function FoundersSection({ content, embedded = false }: FoundersSectionProps) {
     const {
         title = 'Fundadoras The Faces',
-        subtitle = 'Liderazgo y visiÃ³n que impulsan The Faces.',
+        subtitle = 'Liderazgo y visión que impulsan The Faces.',
         description = '',
         founder1Name = 'DRA YEZENIA PARIONA SIHUIN',
-        founder1Role = 'CEO â€¢ Fundadora',
-        founder1Image: _founder1ImageFromDb = '',
+        founder1Role = 'CEO',
         founder2Name = 'DRA CESVI VILLENA BEJAR',
-        founder2Role = 'CEO â€¢ Fundadora',
-        founder2Image: _founder2ImageFromDb = '',
+        founder2Role = 'CEO',
     } = content;
 
     // Force local image override
@@ -72,39 +132,23 @@ export function FoundersSection({ content, embedded = false }: FoundersSectionPr
                     ) : null}
                 </motion.div>
 
-                <div
-                    className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 lg:gap-16 items-center justify-items-center"
-                >
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 lg:gap-16 items-start justify-items-center">
                     <div className="flex justify-center w-full">
-                        <ProfileCard
-                            className="w-full max-w-[320px] sm:max-w-[360px] md:max-w-[380px] lg:max-w-[420px]"
-                            avatarUrl={founder1Image}
+                        <FounderCard
                             name={founder1Name}
-                            title={founder1Role}
-                            showUserInfo={false}
-                            iconUrl=""
-                            grainUrl=""
-                            enableTilt={true}
-                            enableMobileTilt={false}
-                            behindGlowEnabled={true}
-                            behindGlowColor="rgba(232, 48, 206, 0.6)"
-                            innerGradient="linear-gradient(135deg, rgba(232, 48, 206, 0.8) 0%, rgba(35, 35, 255, 0.8) 50%, rgba(46, 248, 160, 0.8) 100%)"
+                            role={founder1Role}
+                            imageUrl={founder1Image}
+                            gradientDirection="left"
+                            delay={0.1}
                         />
                     </div>
                     <div className="flex justify-center w-full">
-                        <ProfileCard
-                            className="w-full max-w-[320px] sm:max-w-[360px] md:max-w-[380px] lg:max-w-[420px]"
-                            avatarUrl={founder2Image}
+                        <FounderCard
                             name={founder2Name}
-                            title={founder2Role}
-                            showUserInfo={false}
-                            iconUrl=""
-                            grainUrl=""
-                            enableTilt={true}
-                            enableMobileTilt={false}
-                            behindGlowEnabled={true}
-                            behindGlowColor="rgba(46, 248, 160, 0.6)"
-                            innerGradient="linear-gradient(135deg, rgba(46, 248, 160, 0.8) 0%, rgba(35, 35, 255, 0.8) 50%, rgba(232, 48, 206, 0.8) 100%)"
+                            role={founder2Role}
+                            imageUrl={founder2Image}
+                            gradientDirection="right"
+                            delay={0.3}
                         />
                     </div>
                 </div>
