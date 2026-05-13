@@ -135,7 +135,7 @@ export function FoundersSection({ content, embedded = false }: FoundersSectionPr
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 lg:gap-16 items-start justify-items-center">
                     <div className="flex justify-center w-full">
                         <FounderCard
-                            name={founder1Name}
+                            name="DRA YEZENIA PARIONA"
                             role={founder1Role}
                             imageUrl={founder1Image}
                             gradientDirection="left"
