@@ -87,7 +87,6 @@ export function FoundersSection({ content, embedded = false }: FoundersSectionPr
         title = 'Fundadoras The Faces',
         subtitle = 'Liderazgo y visión que impulsan The Faces.',
         description = '',
-        founder1Name = 'DRA YEZENIA PARIONA',
         founder1Role = 'CEO',
         founder2Name = 'DRA CESVI VILLENA BEJAR',
         founder2Role = 'CEO',
