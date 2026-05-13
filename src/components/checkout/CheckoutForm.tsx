@@ -33,7 +33,6 @@ interface CheckoutFormProps {
     price: number;
     currency: string;
     source?: string;
-    redirectUrl?: string;
 }
 
 const COUNTRIES = [
@@ -49,7 +48,7 @@ const COUNTRIES = [
     { value: 'OTHER', label: 'Otro' },
 ];
 
-export function CheckoutForm({ checkoutKey, packageName, price, currency, source = 'website', redirectUrl }: CheckoutFormProps) {
+export function CheckoutForm({ checkoutKey, packageName, price, currency, source = 'website' }: CheckoutFormProps) {
     const [isPending, startTransition] = useTransition();
     const [state, setState] = useState<{ success?: boolean; error?: string; registrationId?: string; thankYouUrl?: string | null }>({});
 

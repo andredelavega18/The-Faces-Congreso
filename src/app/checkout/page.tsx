@@ -43,7 +43,6 @@ async function CheckoutContent({ searchParams }: CheckoutPageProps) {
                 price={Number(checkoutConfig.price)}
                 currency={checkoutConfig.currency}
                 source={source}
-                redirectUrl={checkoutConfig.redirectUrl || undefined}
             />
         </section>
     );
